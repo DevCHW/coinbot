@@ -1,0 +1,21 @@
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version "${springBootVersion}"
+        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+        id 'org.asciidoctor.jvm.convert' version "${asciidoctorConvertVersion}"
+        id 'io.spring.javaformat' version "${springJavaFormatVersion}"
+    }
+}
+
+rootProject.name = 'coinbot'
+include 'support:logging'
+include 'support:monitoring'
+include 'core:core-app'
+include 'core:core-domain'
+include 'core:core-enum'
+
+include 'web'
+include 'tests'
+include 'clients:client-upbit'
+include 'storage:db-core'
+
