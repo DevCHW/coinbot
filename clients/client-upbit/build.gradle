@@ -1,7 +1,16 @@
 dependencies {
+    // jwt
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+    // feign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'io.github.openfeign:feign-hc5'
     implementation 'io.github.openfeign:feign-micrometer'
+
+    // jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
 
     testImplementation 'com.fasterxml.jackson.core:jackson-databind'
 }

@@ -1,19 +1,8 @@
-plugins {
-    id 'java'
-}
-
-group = 'com.coinbot'
-version = '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
+    implementation project(":core:core-enum")
+    implementation project(":clients:client-upbit")
+    implementation project(":storage:db-core")
 
-test {
-    useJUnitPlatform()
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework:spring-tx'
 }

@@ -4,11 +4,10 @@ spring.profiles.active: local
 spring:
   config:
     import:
+      - client-upbit.yml
       - monitoring.yml
       - logging.yml
       - db-core.yml
-      - thymeleaf.yml
-      - ../../../../../clients/client-upbit/src/main/resources/upbit-key.yml
   web.resources.add-mappings: false
 
 server:

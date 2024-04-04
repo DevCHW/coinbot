@@ -1,7 +1,11 @@
-example:
+upbit:
   api:
-    url: https://default.example.example
-    exampleValue: exampleDefaultValue
+    url: https://api.upbit.com
+    value: upbit-api
+
+spring:
+  config:
+    import: upbit-key.yml
 
 spring.cloud.openfeign:
   client:
@@ -16,22 +20,3 @@ spring.cloud.openfeign:
   httpclient:
     max-connections: 2000
     max-connections-per-route: 500
-
----
-spring.config.activate.on-profile: local
-
----
-spring.config.activate.on-profile:
-  - local-dev
-  - dev
-
----
-spring.config.activate.on-profile:
-  - staging
-  - live
-
-example:
-  api:
-    url: https://live.example.example
-    exampleValue: exampleLiveValue
-
