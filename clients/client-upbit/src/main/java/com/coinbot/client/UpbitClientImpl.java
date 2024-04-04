@@ -1,6 +1,8 @@
 package com.coinbot.client;
 
 import com.coinbot.client.model.Account;
+import com.coinbot.client.model.CreateOrder;
+import com.coinbot.client.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,14 +18,21 @@ public class UpbitClientImpl implements UpbitClient {
 
     // 계좌 조회
     @Override
-    public Account getAccount() {
-        List<Account> account = upbitApi.getAccount();
-        System.out.println("account = " + account);
-        return null;
+    public List<Account> getAccount() {
+        return upbitApi.getAccount();
     }
 
-    private String getAuthorization(Map<String, String> params) {
+    // 주문 하기
+    @Override
+    public Order order(CreateOrder orderParam) {
+        String authorization = getAuthorization(orderParam.toMap());
+        return upbitApi.order(authorization);
+    }
+
+
+    private String getAuthorization(Map<String, Object> params) {
         return "Bearer " + tokenProvider.getToken(params);
     }
+
 
 }

@@ -20,7 +20,7 @@ class UpbitTokenProvider {
     private final String accessKey;
     private final String secretKey;
 
-    public String getToken(Map<String, String> params) {
+    public String getToken(Map<String, Object> params) {
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes());;
         return Jwts.builder()
                 .claims(getClaims(params))
@@ -28,7 +28,7 @@ class UpbitTokenProvider {
                 .compact();
     }
 
-    private Map<String, Object> getClaims(Map<String, String> params) {
+    private Map<String, Object> getClaims(Map<String, Object> params) {
         Map<String, Object> claims = new ConcurrentHashMap<>();
         claims.put("access_key", accessKey);
         claims.put("nonce", UUID.randomUUID().toString());
@@ -41,7 +41,7 @@ class UpbitTokenProvider {
         return claims;
     }
 
-    private String generateQueryHash(Map<String, String> params) {
+    private String generateQueryHash(Map<String, Object> params) {
         try {
             ArrayList<String> queryElements = new ArrayList<>();
             for (String key : params.keySet()) {

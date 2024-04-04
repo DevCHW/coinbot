@@ -30,7 +30,7 @@ class UpbitClientConfig {
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        Map <String, String> params = new ConcurrentHashMap<>();
+        Map <String, Object> params = new ConcurrentHashMap<>();
         return requestTemplate ->
                 requestTemplate
                 .header("Authorization", tokenProvider().getToken(params))
