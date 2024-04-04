@@ -23,8 +23,6 @@ class UpbitClientConfig {
     public UpbitTokenProvider tokenProvider() {
         String accessKey = env.getProperty(ENV_UPBIT_ACCESS_KEY);
         String secretKey = env.getProperty(ENV_UPBIT_SECRET_KEY);
-        System.out.println("accessKey = " + accessKey);
-        System.out.println("secretKey = " + secretKey);
         return new UpbitTokenProvider(accessKey, secretKey);
     }
 
