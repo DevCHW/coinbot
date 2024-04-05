@@ -2,6 +2,7 @@ package com.coinbot.client;
 
 import com.coinbot.client.model.Account;
 import com.coinbot.client.model.CreateOrder;
+import com.coinbot.client.model.Market;
 import com.coinbot.client.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,14 @@ public class UpbitClientImpl implements UpbitClient {
         return upbitApi.order(authorization);
     }
 
+    // 마켓 목록 조회
+    @Override
+    public List<Market> getMarkets() {
+        Boolean isDetails = true;
+        return upbitApi.getMarket(isDetails);
+    }
 
+    // 쿼리파라미터 Authorization 조회
     private String getAuthorization(Map<String, Object> params) {
         return "Bearer " + tokenProvider.getToken(params);
     }

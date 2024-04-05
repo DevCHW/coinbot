@@ -6,7 +6,8 @@ upbit:
 spring:
   config:
     import: upbit-key.yml
-
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 spring.cloud.openfeign:
   client:
     config:

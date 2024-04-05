@@ -10,4 +10,9 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
+    // 주문하기
+    public void order() {
+
+    }
+
 }
