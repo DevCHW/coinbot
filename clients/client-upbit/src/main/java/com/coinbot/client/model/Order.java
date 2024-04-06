@@ -3,9 +3,11 @@ package com.coinbot.client.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString
 public class Order {
     private String uuid;            // 주문의 고유 아이디
     private String side;            // 주문 종류

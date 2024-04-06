@@ -1,9 +1,9 @@
 package com.coinbot.client;
 
-import com.coinbot.client.model.Account;
-import com.coinbot.client.model.CreateOrder;
-import com.coinbot.client.model.Market;
-import com.coinbot.client.model.Order;
+import com.coinbot.client.model.*;
+import com.coinbot.client.param.BuyParam;
+import com.coinbot.client.param.CandleParam;
+import com.coinbot.client.param.SellParam;
 
 import java.util.List;
 
@@ -15,13 +15,33 @@ public interface UpbitClient {
     List<Account> getAccount();
 
     /**
-     * 주문
+     * 매수
      */
-    Order order(CreateOrder orderParam);
+    Order buy(BuyParam param);
 
     /**
-     * 마켓 목록 조회
+     * 매도
      */
-    List<Market> getMarkets();
+    Order sell(SellParam param);
 
+    /**
+     * 코인 전체 목록 조회
+     */
+    List<Coin> getCoins();
+
+    /**
+     * 분봉 캔들 조회
+     */
+    List<Candle> getCandles(int unit, CandleParam param);
+
+    /**
+     * 현재가 정보 목록 조회
+     */
+    List<Ticker> getTickers(List<String> markets);
+
+
+    /**
+     * 현재가 정보 단건 조회
+     */
+    Ticker getTicker(String market);
 }

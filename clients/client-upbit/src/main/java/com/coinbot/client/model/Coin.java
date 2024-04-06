@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Market {
+public class Coin {
     private String market;              // 업비트에서 제공중인 시장 정보
     private String koreanName;          // 거래 대상 디지털 자산 한글명
     private String englishName;         // 거래 대상 디지털 자산 영문명

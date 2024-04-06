@@ -10,7 +10,7 @@
     </appender>
 
     <logger name="org.springframework" level="INFO"/>
-    <logger name="com.nemam" level="DEBUG"/>
+    <logger name="com.coinbot" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
