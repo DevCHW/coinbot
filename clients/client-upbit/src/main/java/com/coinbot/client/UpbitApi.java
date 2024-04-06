@@ -25,7 +25,6 @@ interface UpbitApi {
     @PostMapping(value = "/v1/orders")
     Order buy(@RequestBody BuyParam param);
 
-
     /**
      * 코인 목록 조회
      */
@@ -46,4 +45,14 @@ interface UpbitApi {
      */
     @GetMapping("/v1/ticker")
     List<Ticker> getTickers(@RequestParam("markets") MultiValueMap<String, String> markets);
+
+    /**
+     * 최근 체결 내역 조회
+     */
+    @GetMapping("/v1/trades/ticks")
+    List<Tick> getTicks(@RequestParam("market") String market,
+                        @RequestParam(value = "count", required = false) Integer count,
+                        @RequestParam(value = "to", required = false) @DateTimeFormat(pattern = "HH:mm:ss") LocalDateTime to,
+                        @RequestParam(value = "daysAgo", required = false) Integer daysAgo,
+                        @RequestParam(value = "cursor", required = false) String cursor);
 }

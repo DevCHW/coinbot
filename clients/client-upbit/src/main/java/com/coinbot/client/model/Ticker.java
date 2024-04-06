@@ -1,5 +1,6 @@
 package com.coinbot.client.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -7,16 +8,21 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Ticker {
 
     private String market;                    // 종목 구분 코드
-    private String tradeDate;                 // 최근 거래 일자(UTC / 포맷: yyyyMMdd)
-    private String tradeTime;                 // 최근 거래 시각(UTC / 포맷: HHmmss)
-    private String tradeDateKst;              // 최근 거래 일자(KST / 포맷 : yyyyMMdd)
-    private String tradeTimeKst;              // 최근 거래 시각(KST / 포맷 : HHmmss)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+    private LocalDate tradeDate;              // 최근 거래 일자(UTC / 포맷: yyyyMMdd)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HHmmss")
+    private LocalTime tradeTime;              // 최근 거래 시각(UTC / 포맷: HHmmss)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+    private LocalDate tradeDateKst;           // 최근 거래 일자(KST / 포맷 : yyyyMMdd)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HHmmss")
+    private LocalTime tradeTimeKst;           // 최근 거래 시각(KST / 포맷 : HHmmss)
     private Long tradeTimestamp;              // 최근 거래 일시(UTC / 포맷 Unix Timestamp)
     private BigDecimal openingPrice;          // 시가
     private BigDecimal highPrice;             // 고가

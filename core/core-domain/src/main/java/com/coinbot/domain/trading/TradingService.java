@@ -1,4 +1,4 @@
-package com.coinbot.domain;
+package com.coinbot.domain.trading;
 
 import com.coinbot.client.UpbitClient;
 import com.coinbot.client.model.Account;
@@ -6,21 +6,20 @@ import com.coinbot.client.model.Coin;
 import com.coinbot.client.model.Order;
 import com.coinbot.client.model.OrderType;
 import com.coinbot.client.param.BuyParam;
+import com.coinbot.domain.BaseException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.dialect.identity.HSQLIdentityColumnSupport;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import static com.coinbot.domain.TradingInfo.*;
+import static com.coinbot.domain.trading.TradingInfo.*;
 
 @Service
 @RequiredArgsConstructor
 public class TradingService {
 
     private final UpbitClient upbit;
-
-    private static final double buyPercentage = 0.2; // 매수 시 시드의 몇 퍼센트로 들어갈 것인지?
 
     // 트레이딩 정보 초기화
     public void initialize() {
@@ -49,9 +48,7 @@ public class TradingService {
     }
     
     // 매수
-    public void buy(String market) {
-        // 시드머니에서 설정한 퍼센테이지 만큼 진입량 설정.
-        Long price = (long) (TradingInfo.seedMoney * 0.2);
+    public void buy(String market, BigDecimal price) {
         BuyParam param = BuyParam.builder()
                 .market(market)
                 .ordType(OrderType.PRICE)   //시장가 매수
@@ -62,5 +59,8 @@ public class TradingService {
     }
 
     // 매도
+    public void sell(String market) {
+
+    }
 
 }

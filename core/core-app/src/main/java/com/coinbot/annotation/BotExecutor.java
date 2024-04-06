@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface BotExecutePlanner {
+public @interface BotExecutor {
     @AliasFor(
             annotation = Component.class
     )

@@ -4,6 +4,7 @@ import com.coinbot.client.model.*;
 import com.coinbot.client.param.BuyParam;
 import com.coinbot.client.param.CandleParam;
 import com.coinbot.client.param.SellParam;
+import com.coinbot.client.param.TickParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -46,8 +47,8 @@ public class UpbitClientImpl implements UpbitClient {
 
     // 분봉 캔들 조회
     @Override
-    public List<Candle> getCandles(int unit, CandleParam param) {
-        return upbitApi.getMinuteCandles(unit, param.getMarket(), param.getCount(), param.getTo());
+    public List<Candle> getCandles(CandleParam param) {
+        return upbitApi.getMinuteCandles(param.getUnit(), param.getMarket(), param.getCount(), param.getTo());
     }
     
     // 현재가 정보 목록 조회
@@ -67,6 +68,12 @@ public class UpbitClientImpl implements UpbitClient {
         param.add("markets", market);
         List<Ticker> tickers = upbitApi.getTickers(param);
         return tickers.get(0);
+    }
+
+    // 체결 목록 조회
+    @Override
+    public List<Tick> getTicks(TickParam param) {
+        return upbitApi.getTicks(param.getMarket(), param.getCount(), param.getTo(), param.getDaysAgo(), param.getCursor());
     }
 
 }

@@ -1,4 +1,4 @@
-package com.coinbot.domain;
+package com.coinbot.domain.trading;
 
 /**
  * 매매
