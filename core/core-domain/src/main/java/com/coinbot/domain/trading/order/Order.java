@@ -1,5 +1,6 @@
-package com.coinbot.domain.order;
+package com.coinbot.domain.trading.order;
 
+import com.coinbot.enums.OrderType;
 import com.coinbot.storage.db.core.entity.OrderEntity;
 import lombok.AccessLevel;
 import lombok.Getter;

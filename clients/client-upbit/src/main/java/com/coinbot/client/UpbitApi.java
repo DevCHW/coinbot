@@ -1,7 +1,7 @@
 package com.coinbot.client;
 
 import com.coinbot.client.model.*;
-import com.coinbot.client.param.BuyParam;
+import com.coinbot.client.param.OrderParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.MultiValueMap;
@@ -23,13 +23,13 @@ interface UpbitApi {
      * 매수
      */
     @PostMapping(value = "/v1/orders")
-    Order buy(@RequestBody BuyParam param);
+    Order buy(@RequestBody OrderParam param);
 
     /**
      * 코인 목록 조회
      */
     @GetMapping("/v1/market/all")
-    List<Coin> getCoins(@RequestParam("isDetails") Boolean isDetails);
+    List<Market> getCoins(@RequestParam("isDetails") Boolean isDetails);
 
     /**
      * 분봉 캔들 목록 조회

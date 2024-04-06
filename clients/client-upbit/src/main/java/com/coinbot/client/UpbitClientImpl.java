@@ -1,7 +1,7 @@
 package com.coinbot.client;
 
 import com.coinbot.client.model.*;
-import com.coinbot.client.param.BuyParam;
+import com.coinbot.client.param.OrderParam;
 import com.coinbot.client.param.CandleParam;
 import com.coinbot.client.param.SellParam;
 import com.coinbot.client.param.TickParam;
@@ -27,7 +27,7 @@ public class UpbitClientImpl implements UpbitClient {
 
     // 매수
     @Override
-    public Order buy(BuyParam param) {
+    public Order buy(OrderParam param) {
         return upbitApi.buy(param);
     }
 
@@ -40,7 +40,7 @@ public class UpbitClientImpl implements UpbitClient {
 
     // 코인 전체 목록 조회
     @Override
-    public List<Coin> getCoins() {
+    public List<Market> getMarkets() {
         Boolean isDetails = true;
         return upbitApi.getCoins(isDetails);
     }

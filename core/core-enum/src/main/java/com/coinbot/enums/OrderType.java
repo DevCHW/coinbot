@@ -1,4 +1,4 @@
-package com.coinbot.domain.order;
+package com.coinbot.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,21 +1,25 @@
 package com.coinbot.app.bot;
 
 import com.coinbot.domain.strategy.Strategy;
-import com.coinbot.domain.strategy.Test;
-import com.coinbot.domain.trading.TradingBotInitializer;
+import com.coinbot.domain.strategy.StrategyExecutor;
+import com.coinbot.domain.strategy.StrategyType;
+import com.coinbot.domain.trading.TradingInfoInitializer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 @Component
 @RequiredArgsConstructor
+@EnableScheduling
 public class BotExecutor {
 
-    private final TradingBotInitializer initializer;
-    private final Strategy strategy;
-    private final Test test;
+    private final TradingInfoInitializer initializer;
+    private final StrategyExecutor strategyExecutor;
 
     @EventListener(ApplicationReadyEvent.class)
     public void init() {
@@ -24,8 +28,7 @@ public class BotExecutor {
 
     @Scheduled(fixedDelay = 3000, initialDelay = 3000)
     public void trade() {
-//        strategy.execute();   // 매매 전략 실행
-        test.getTicksTest();
+        strategyExecutor.execute(StrategyType.TEST);
     }
 
 }

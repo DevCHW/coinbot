@@ -4,6 +4,7 @@ import com.coinbot.client.UpbitClient;
 import com.coinbot.client.model.Candle;
 import com.coinbot.client.model.Ticker;
 import com.coinbot.client.param.CandleParam;
+import com.coinbot.domain.strategy.Strategy;
 import com.coinbot.domain.trading.TradingInfo;
 import com.coinbot.domain.trading.TradingService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import static org.springframework.util.StringUtils.*;
  */
 @Component
 @RequiredArgsConstructor
-public class FiveMinuteThreeCandleBuyStrategy implements Strategy {
+public class FiveMinuteThreeCandleTradingStrategy implements Strategy {
 
     private final UpbitClient upbit;
     private final TradingService tradingService;
@@ -30,19 +31,15 @@ public class FiveMinuteThreeCandleBuyStrategy implements Strategy {
     public void execute() {
         String target = findTarget(); // 매수 타이밍인 종목 검색
         if (hasText(target)) {
-            BigDecimal price = TradingInfo.seedMoney.multiply(buyPercentage);
-            System.out.println("매수 타이밍 조건을 만족하여 매수 주문을 실행합니다.");
-            System.out.println("현재 시드머니 = " + TradingInfo.seedMoney + "진입할 금액 = " + price);
-            System.out.println("종목 = " + target);
+            BigDecimal price = TradingInfo.seedMoney().multiply(buyPercentage);
 //            tradingService.buy(target, price); // 매수 주문
-            // 스탑로스 주문
         }
     }
 
-    // 5분봉 3틱 매수타이밍 종목 선정
+    // 5분봉 3틱 전략 조건에 맞는 매수 종목 검색
     private String findTarget() {
         // 모든 Ticker를 조회한다.
-        List<Ticker> tickers = upbit.getTickers(TradingInfo.marketList);
+        List<Ticker> tickers = upbit.getTickers(TradingInfo.marketList());
 
         // 24시간 기준 거래대금 Top 5 종목을 필터링한다.
         List<Ticker> top5Volume24h = tickers.stream()

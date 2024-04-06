@@ -1,7 +1,7 @@
 package com.coinbot.client;
 
 import com.coinbot.client.model.*;
-import com.coinbot.client.param.BuyParam;
+import com.coinbot.client.param.OrderParam;
 import com.coinbot.client.param.CandleParam;
 import com.coinbot.client.param.SellParam;
 import com.coinbot.client.param.TickParam;
@@ -18,7 +18,7 @@ public interface UpbitClient {
     /**
      * 매수
      */
-    Order buy(BuyParam param);
+    Order buy(OrderParam param);
 
     /**
      * 매도
@@ -28,7 +28,7 @@ public interface UpbitClient {
     /**
      * 코인 전체 목록 조회
      */
-    List<Coin> getCoins();
+    List<Market> getMarkets();
 
     /**
      * 분봉 캔들 조회

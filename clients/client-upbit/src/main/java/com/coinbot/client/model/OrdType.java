@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum OrderType {
+public enum OrdType {
     LIMIT("limit", "지정가 주문"),
     PRICE("price", "시장가 주문(매수)"),
     MARKET("market", "시장가 주문(매도)"),
