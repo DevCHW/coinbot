@@ -1,4 +1,4 @@
-package com.coinbot.app;
+package com.coinbot.app.bot;
 
 import com.coinbot.domain.strategy.Strategy;
 import com.coinbot.domain.strategy.Test;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class TradingBotExecutor {
+public class BotExecutor {
 
     private final TradingBotInitializer initializer;
     private final Strategy strategy;

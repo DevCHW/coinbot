@@ -1,4 +1,4 @@
-package com.coinbot.config;
+package com.coinbot.app.bot.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

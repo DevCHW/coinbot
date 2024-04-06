@@ -1,4 +1,4 @@
-package com.coinbot.config;
+package com.coinbot.app.bot.config;
 
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Configuration;
