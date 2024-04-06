@@ -1,5 +1,6 @@
 package com.coinbot.client.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -18,6 +19,7 @@ public class Tick {
     private BigDecimal tradeVolume;         // 체결량
     private BigDecimal prevClosingPrice;    // 전일 종가(UTC 0시 기준)
     private BigDecimal changePrice;         // 변화량
-    private String askBid;                  // 매도/매수
+    @JsonProperty("ask_bid")
+    private Side side;                      // 매도/매수
     private Long sequentialId;              // 체결 번호 (Unique)
 }

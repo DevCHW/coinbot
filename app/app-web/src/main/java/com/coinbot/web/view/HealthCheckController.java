@@ -1,4 +1,4 @@
-package com.coinbot.web.controller;
+package com.coinbot.web.view;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

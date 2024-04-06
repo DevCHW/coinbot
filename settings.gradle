@@ -8,14 +8,23 @@ pluginManagement {
 }
 
 rootProject.name = 'coinbot'
-include 'support:logging'
-include 'support:monitoring'
-include 'core:core-app'
+
+// app
+include 'app:app-bot'
+include 'app:app-web'
+
+// core
 include 'core:core-domain'
 include 'core:core-enum'
 
-include 'web'
-include 'tests'
-include 'clients:client-upbit'
-include 'storage:db-core'
+// support
+include 'support:logging'
+include 'support:monitoring'
 
+// clients
+include 'clients:client-upbit'
+
+// test
+include 'tests'
+
+include 'storage:db-core'

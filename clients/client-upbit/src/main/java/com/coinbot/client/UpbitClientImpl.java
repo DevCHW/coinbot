@@ -75,5 +75,7 @@ public class UpbitClientImpl implements UpbitClient {
     public List<Tick> getTicks(TickParam param) {
         return upbitApi.getTicks(param.getMarket(), param.getCount(), param.getTo(), param.getDaysAgo(), param.getCursor());
     }
+    
+    // 주문 목록 조회
 
 }
