@@ -5,7 +5,8 @@ import org.springframework.context.annotation.Bean;
 
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 
-public class KakaoFeignConfig {
+public class KakaoAuthApiConfig {
+
     @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
@@ -13,4 +14,5 @@ public class KakaoFeignConfig {
                     .header(CONTENT_TYPE, "application/x-www-form-urlencoded");
         };
     }
+
 }

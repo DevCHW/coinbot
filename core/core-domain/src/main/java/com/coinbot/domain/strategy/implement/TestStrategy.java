@@ -7,7 +7,6 @@ import com.coinbot.domain.trading.TradingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -37,8 +36,6 @@ public class TestStrategy implements Strategy {
             System.out.println(count + ". 평단가 기준 화폐 = " + asset.getUnitCurrency());
             System.out.println();
         }
-
-        kakaoClient.createAccessToken();
 
     }
 }

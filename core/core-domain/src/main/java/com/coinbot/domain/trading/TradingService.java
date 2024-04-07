@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class TradingService {
 
     private final OrderService orderService;
-    private final TradingInfoInitializer initializer;
+    private final TradingInfoManager tradingInfoManager;
 
     // 매수
     public void buy(String market, BigDecimal price) {
@@ -29,9 +29,14 @@ public class TradingService {
         orderService.orderTest(market, null, quantity, OrderType.SELL);
     }
     
-    // 트레이딩 정보 새로고침
-    public void tradingInfoReload() {
-        initializer.initialize();
+    // 트레이딩 정보 초기화
+    public void init() {
+        tradingInfoManager.init();
+    }
+
+    // 트레이딩 정보 업데이트
+    public void updateInfo() {
+        tradingInfoManager.update();
     }
 
 }
