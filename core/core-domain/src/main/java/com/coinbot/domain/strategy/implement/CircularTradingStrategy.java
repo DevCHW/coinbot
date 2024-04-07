@@ -1,4 +1,6 @@
-package com.coinbot.domain.strategy;
+package com.coinbot.domain.strategy.implement;
+
+import com.coinbot.domain.strategy.Strategy;
 
 /**
  * 순환매수, 매도전략

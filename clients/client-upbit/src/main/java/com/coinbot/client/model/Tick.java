@@ -1,5 +1,6 @@
 package com.coinbot.client.model;
 
+import com.coinbot.client.model.enums.Side;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;

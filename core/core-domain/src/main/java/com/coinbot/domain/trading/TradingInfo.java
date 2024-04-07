@@ -25,7 +25,7 @@ public class TradingInfo {
         if (Objects.isNull(krwAsset)) {
             return new BigDecimal("0");
         }
-        return krwAsset.getBalance();
+        return new BigDecimal(String.valueOf(krwAsset.getBalance().intValue()));
     }
 
     public static void seedMoney(BigDecimal value) {
@@ -53,6 +53,13 @@ public class TradingInfo {
         return assets;
     }
 
+    public static BigDecimal quantity(String market) {
+        String prefix = "KRW-";
+        int idx = market.indexOf(prefix);
+        String symbol = market.substring(idx + prefix.length());
+        return assets.get(symbol).getBalance();
+    }
+
     public static void init(InitializeParam param) {
         trading = param.isTrading();
         marketList = param.getMarketList();
@@ -61,7 +68,7 @@ public class TradingInfo {
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    static class InitializeParam {
+    public static class InitializeParam {
         private boolean trading;                // 현재 트레이딩 진행 여부
         private BigDecimal seedMoney;           // 시드머니(KRW 기준)
         private List<String> marketList;        // 전체 마켓 이름 목록
@@ -78,8 +85,8 @@ public class TradingInfo {
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    static class Asset {
-        private String currency;             // 화폐를 의미하는 영문 대문자 코드 (코인이름 또는 화폐)
+    public static class Asset {
+        private String symbol;               // 화폐를 의미하는 영문 대문자 코드 (코인이름 또는 화폐)
         private BigDecimal balance;          // 주문 가능 금액/수량
         private BigDecimal locked;           // 주문 중 묶여있는 금액/수량
         private BigDecimal avgBuyPrice;      // 매수평균가
@@ -87,8 +94,8 @@ public class TradingInfo {
         private String unitCurrency;         // 평단가 기준 화폐
 
         @Builder
-        public Asset(String currency, BigDecimal balance, BigDecimal locked, BigDecimal avgBuyPrice, Boolean avgBuyPriceModified, String unitCurrency) {
-            this.currency = currency;
+        public Asset(String symbol, BigDecimal balance, BigDecimal locked, BigDecimal avgBuyPrice, Boolean avgBuyPriceModified, String unitCurrency) {
+            this.symbol = symbol;
             this.balance = balance;
             this.locked = locked;
             this.avgBuyPrice = avgBuyPrice;

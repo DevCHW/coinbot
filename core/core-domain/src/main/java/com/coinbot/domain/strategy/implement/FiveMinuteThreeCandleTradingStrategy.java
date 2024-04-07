@@ -1,9 +1,9 @@
-package com.coinbot.domain.strategy;
+package com.coinbot.domain.strategy.implement;
 
 import com.coinbot.client.UpbitClient;
 import com.coinbot.client.model.Candle;
 import com.coinbot.client.model.Ticker;
-import com.coinbot.client.param.CandleParam;
+import com.coinbot.client.param.MinuteCandleParam;
 import com.coinbot.domain.strategy.Strategy;
 import com.coinbot.domain.trading.TradingInfo;
 import com.coinbot.domain.trading.TradingService;
@@ -54,7 +54,7 @@ public class FiveMinuteThreeCandleTradingStrategy implements Strategy {
 
         // 변동성에 따라서 매도 가격, 손절 가격 등을 계산한다.
         String market = top5Volume24h.get(0).getMarket(); // 종목
-        CandleParam candleParam = CandleParam.builder()
+        MinuteCandleParam candleParam = MinuteCandleParam.builder()
                 .unit(5)        // 캔들 단위
                 .market(market) // 캔들 종목
                 .count(3)       // 가져올 캔들의 수

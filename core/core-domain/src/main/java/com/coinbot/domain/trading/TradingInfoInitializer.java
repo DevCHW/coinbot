@@ -26,7 +26,7 @@ public class TradingInfoInitializer {
                 .collect(Collectors.toMap(
                     Account::getCurrency, // KEY
                     account -> TradingInfo.Asset.builder()
-                            .currency(account.getCurrency())
+                            .symbol(account.getCurrency())
                             .balance(account.getBalance())
                             .locked(account.getLocked())
                             .avgBuyPrice(account.getAvgBuyPrice())
@@ -52,9 +52,5 @@ public class TradingInfoInitializer {
                 .marketList(marketList)
                 .build();
         TradingInfo.init(param);
-
-        System.out.println("현재 시드머니 = " + TradingInfo.seedMoney());
-        System.out.println("현재 트레이딩 진행 여부 = " + TradingInfo.trading());
-        System.out.println("현재 업비트 마켓 목록" + TradingInfo.marketList());
     }
 }

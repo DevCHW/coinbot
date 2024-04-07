@@ -1,6 +1,5 @@
 package com.coinbot.app.bot;
 
-import com.coinbot.domain.strategy.Strategy;
 import com.coinbot.domain.strategy.StrategyExecutor;
 import com.coinbot.domain.strategy.StrategyType;
 import com.coinbot.domain.trading.TradingInfoInitializer;
@@ -10,8 +9,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -26,7 +23,7 @@ public class BotExecutor {
         initializer.initialize();
     }
 
-    @Scheduled(fixedDelay = 3000, initialDelay = 3000)
+    @Scheduled(fixedDelay = 30000, initialDelay = 3000)
     public void trade() {
         strategyExecutor.execute(StrategyType.TEST);
     }

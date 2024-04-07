@@ -1,4 +1,4 @@
-package com.coinbot.client.model;
+package com.coinbot.client.model.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

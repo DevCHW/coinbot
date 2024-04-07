@@ -1,7 +1,7 @@
 package com.coinbot.domain.trading.calculator;
 
 import com.coinbot.client.UpbitClient;
-import com.coinbot.client.model.Side;
+import com.coinbot.client.model.enums.Side;
 import com.coinbot.client.model.Tick;
 import com.coinbot.client.param.TickParam;
 import lombok.RequiredArgsConstructor;

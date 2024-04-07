@@ -1,23 +1,38 @@
 package com.coinbot.client;
 
 import com.coinbot.client.model.*;
+import com.coinbot.client.param.MinuteCandleParam;
 import com.coinbot.client.param.OrderParam;
-import com.coinbot.client.param.CandleParam;
-import com.coinbot.client.param.SellParam;
 import com.coinbot.client.param.TickParam;
+import com.google.gson.Gson;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import java.util.List;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.MessageDigest;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @RequiredArgsConstructor
 public class UpbitClientImpl implements UpbitClient {
 
     private final UpbitApi upbitApi;
-    private final UpbitTokenProvider tokenProvider;
+    private final Environment env;
 
     // 계좌 조회
     @Override
@@ -25,29 +40,22 @@ public class UpbitClientImpl implements UpbitClient {
         return upbitApi.getAccount();
     }
 
-    // 매수
+    // 주문
     @Override
-    public Order buy(OrderParam param) {
-        return upbitApi.buy(param);
-    }
-
-    // 매수
-    @Override
-    public Order sell(SellParam param) {
-//        return upbitApi.order(param);
-        return null;
+    public Order order(OrderParam param) {
+        return upbitApi.order(param);
     }
 
     // 코인 전체 목록 조회
     @Override
     public List<Market> getMarkets() {
         Boolean isDetails = true;
-        return upbitApi.getCoins(isDetails);
+        return upbitApi.getMarkets(isDetails);
     }
 
-    // 분봉 캔들 조회
+    // 분봉 캔들 목록 조회
     @Override
-    public List<Candle> getCandles(CandleParam param) {
+    public List<Candle> getCandles(MinuteCandleParam param) {
         return upbitApi.getMinuteCandles(param.getUnit(), param.getMarket(), param.getCount(), param.getTo());
     }
     
@@ -76,6 +84,68 @@ public class UpbitClientImpl implements UpbitClient {
         return upbitApi.getTicks(param.getMarket(), param.getCount(), param.getTo(), param.getDaysAgo(), param.getCursor());
     }
     
-    // 주문 목록 조회
+    // 마켓에 따른 주문 가능 정보 조회
+    @Override
+    public OrderChance getOrderChance(String market) {
+        return upbitApi.getOrderChance(market);
+    }
+
+    // 주문 정보 조회
+    @Override
+    public Order getOrder(String uuid) {
+        return upbitApi.getOrder(uuid);
+    }
+
+
+    // test
+    @Override
+    public void testOrder(OrderParam orderParam) {
+        try {
+            String accessKey = env.getProperty("upbit.access.key");
+            String secretKey = env.getProperty("upbit.secret.key");
+            String serverUrl = "https://api.upbit.com";
+
+            HashMap<String, String> params = new HashMap<>();
+            params.put("market", orderParam.getMarket());
+            params.put("side", orderParam.getSide());
+            params.put("volume", String.valueOf(orderParam.getVolume()));
+            params.put("ord_type", orderParam.getOrdType());
+
+            ArrayList<String> queryElements = new ArrayList<>();
+            for(Map.Entry<String, String> entity : params.entrySet()) {
+                queryElements.add(entity.getKey() + "=" + entity.getValue());
+            }
+
+            String queryString = String.join("&", queryElements.toArray(new String[0]));
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(queryString.getBytes(StandardCharsets.UTF_8));
+
+            String queryHash = String.format("%0128x", new BigInteger(1, md.digest()));
+
+            Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
+            Map<String, Object> claims = new ConcurrentHashMap<>();
+            claims.put("access_key", accessKey);
+            claims.put("nonce", UUID.randomUUID().toString());
+            claims.put("query_hash", queryHash);
+            claims.put("query_hash_alg", "SHA512");
+            String jwtToken = Jwts.builder()
+                    .claims(claims)
+                    .signWith(key)
+                    .compact();
+
+            String authenticationToken = "Bearer " + jwtToken;
+
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpPost request = new HttpPost(serverUrl + "/v1/orders");
+            request.setHeader("Content-Type", "application/json");
+            request.addHeader("Authorization", authenticationToken);
+            request.setEntity(new StringEntity(new Gson().toJson(params)));
+            HttpResponse response = client.execute(request);
+            HttpEntity entity = response.getEntity();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }
