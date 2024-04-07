@@ -1,5 +1,6 @@
 package com.coinbot.domain.strategy.implement;
 
+import com.coinbot.client.kakao.KakaoClient;
 import com.coinbot.domain.strategy.Strategy;
 import com.coinbot.domain.trading.TradingInfo;
 import com.coinbot.domain.trading.TradingService;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class TestStrategy implements Strategy {
 
     private final TradingService tradingService;
+    private final KakaoClient kakaoClient;
 
     @Override
     public void execute() {
@@ -36,20 +38,7 @@ public class TestStrategy implements Strategy {
             System.out.println();
         }
 
-        String market = "KRW-BCH";
-        BigDecimal seed = TradingInfo.seedMoney();
-        BigDecimal price = seed.subtract(seed.multiply(new BigDecimal("0.05")));
+        kakaoClient.createAccessToken();
 
-//        OrderChance orderChance = upbit.getOrderChance(market);
-
-        // BCH 전량 매수
-//        tradingService.buy(market, price.setScale(0, RoundingMode.DOWN));
-
-        tradingService.tradingInfoReload();
-
-        // BCH 전량 매도
-        tradingService.sellTmp(market, TradingInfo.quantity(market));
-
-        tradingService.tradingInfoReload();
     }
 }

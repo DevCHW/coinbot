@@ -1,8 +1,8 @@
 package com.coinbot.domain.trading;
 
-import com.coinbot.client.UpbitClient;
-import com.coinbot.client.model.Account;
-import com.coinbot.client.model.Market;
+import com.coinbot.client.upbit.UpbitClient;
+import com.coinbot.client.upbit.model.Account;
+import com.coinbot.client.upbit.model.Market;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

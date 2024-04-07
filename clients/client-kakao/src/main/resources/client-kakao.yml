@@ -1,0 +1,32 @@
+kakao:
+  auth:
+    api:
+      url : https://kauth.kakao.com
+      value: kakao-auth-api
+  message:
+    api:
+      url : https://kapi.kakao.com
+      value: kakao-message-api
+
+spring:
+  config:
+    import: kakao-key.yml
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+spring.cloud.openfeign:
+  client:
+    config:
+      kakao-auth-api:
+        connectTimeout: 2100
+        readTimeout: 5000
+        loggerLevel: full
+      kakao-message-api:
+        connectTimeout: 2100
+        readTimeout: 5000
+        loggerLevel: full
+  compression:
+    response:
+      enabled: false
+  httpclient:
+    max-connections: 2000
+    max-connections-per-route: 500

@@ -5,6 +5,7 @@ spring:
   config:
     import:
       - client-upbit.yml
+      - client-kakao.yml
       - monitoring.yml
       - logging.yml
       - db-core.yml

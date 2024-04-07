@@ -1,12 +1,11 @@
 package com.coinbot.domain.strategy.implement;
 
-import com.coinbot.client.UpbitClient;
-import com.coinbot.client.model.Candle;
-import com.coinbot.client.model.Ticker;
-import com.coinbot.client.param.MinuteCandleParam;
+import com.coinbot.client.upbit.UpbitClient;
+import com.coinbot.client.upbit.model.Candle;
+import com.coinbot.client.upbit.model.Ticker;
+import com.coinbot.client.upbit.param.MinuteCandleParam;
 import com.coinbot.domain.strategy.Strategy;
 import com.coinbot.domain.trading.TradingInfo;
-import com.coinbot.domain.trading.TradingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +23,6 @@ import static org.springframework.util.StringUtils.*;
 public class FiveMinuteThreeCandleTradingStrategy implements Strategy {
 
     private final UpbitClient upbit;
-    private final TradingService tradingService;
     private static final BigDecimal buyPercentage = new BigDecimal("0.2"); // 진입 시 현재 시드의 퍼센테이지 만큼 매수
 
     @Override
@@ -44,27 +42,28 @@ public class FiveMinuteThreeCandleTradingStrategy implements Strategy {
         // 24시간 기준 거래대금 Top 5 종목을 필터링한다.
         List<Ticker> top5Volume24h = tickers.stream()
                 .sorted(Comparator.comparing(Ticker::getAccTradePrice24h).reversed())
-                .limit(5)
+                .limit(10)
                 .toList();
-        // 체결 강도는 계산을 넣을 지 말지?
 
-        // 위 단계를 통과한 종목들의 5분봉 3캔들을 가져온다.
+        // 루프를 돌며 5분봉 10캔들 개를 조회한다.
+        for (Ticker ticker : top5Volume24h) {
+            String market = ticker.getMarket();
+            MinuteCandleParam candleParam = MinuteCandleParam.builder()
+                    .unit(5)        // 캔들 단위
+                    .market(market) // 캔들 종목
+                    .count(10)       // 가져올 캔들의 수
+                    .build();
+            List<Candle> minuteCandles = upbit.getCandles(candleParam);
+            boolean isTiming = false;
+            for (Candle minuteCandle : minuteCandles) {
 
-        // 해당 5종목의 변동성이 어느정도인지 체크한다.
+                System.out.println("minuteCandle = " + minuteCandle);
+                // 전체 길이..?
+            }
+            // 5분봉 3캔들이 음봉이며 매수하기에 적합한지 검사한다.
 
-        // 변동성에 따라서 매도 가격, 손절 가격 등을 계산한다.
-        String market = top5Volume24h.get(0).getMarket(); // 종목
-        MinuteCandleParam candleParam = MinuteCandleParam.builder()
-                .unit(5)        // 캔들 단위
-                .market(market) // 캔들 종목
-                .count(3)       // 가져올 캔들의 수
-                .build();
-        List<Candle> minuteCandles = upbit.getCandles(candleParam);
-        for (Candle minuteCandle : minuteCandles) {
-            System.out.println("minuteCandle = " + minuteCandle);
         }
 
-        // 5분봉 3캔들 적합성 검사
         return top5Volume24h.get(0).getMarket();
     }
 }

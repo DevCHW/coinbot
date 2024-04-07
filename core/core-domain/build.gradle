@@ -1,6 +1,7 @@
 dependencies {
     implementation project(":core:core-enum")
     implementation project(":clients:client-upbit")
+    implementation project(":clients:client-kakao")
     implementation project(":storage:db-core")
 
     implementation 'org.springframework:spring-context'

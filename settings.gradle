@@ -23,8 +23,11 @@ include 'support:monitoring'
 
 // clients
 include 'clients:client-upbit'
+include 'clients:client-kakao'
 
 // test
 include 'tests'
 
+// storage
 include 'storage:db-core'
+

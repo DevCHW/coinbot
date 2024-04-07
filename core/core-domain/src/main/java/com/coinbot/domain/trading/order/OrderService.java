@@ -1,18 +1,16 @@
 package com.coinbot.domain.trading.order;
 
-import com.coinbot.client.UpbitClient;
-import com.coinbot.client.model.enums.OrdType;
-import com.coinbot.client.model.Order;
-import com.coinbot.client.model.enums.Side;
-import com.coinbot.client.param.OrderParam;
+import com.coinbot.client.upbit.UpbitClient;
+import com.coinbot.client.upbit.model.enums.OrdType;
+import com.coinbot.client.upbit.model.Order;
+import com.coinbot.client.upbit.model.enums.Side;
+import com.coinbot.client.upbit.param.OrderParam;
 import com.coinbot.enums.OrderType;
 import com.coinbot.storage.db.core.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
 
 @Service
 @RequiredArgsConstructor
