@@ -27,7 +27,8 @@ public class TradingInfo {
         }
         return new BigDecimal(String.valueOf(krwAsset.getBalance().intValue()));
     }
-
+    
+    // 시드머니 수정
     public static void seedMoney(BigDecimal value) {
         Asset krwAsset = assets.get("KRW");
         krwAsset.balance(value);

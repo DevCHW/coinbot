@@ -57,7 +57,13 @@ public class UpbitClientImpl implements UpbitClient {
     public List<Candle> getCandles(MinuteCandleParam param) {
         return upbitApi.getMinuteCandles(param.getUnit(), param.getMarket(), param.getCount(), param.getTo());
     }
-    
+
+    // 분봉 캔들 단건 조회
+    @Override
+    public Candle getCandle(MinuteCandleParam param) {
+        return upbitApi.getMinuteCandles(param.getUnit(), param.getMarket(), 1, param.getTo()).get(0);
+    }
+
     // 현재가 정보 목록 조회
     @Override
     public List<Ticker> getTickers(List<String> markets) {

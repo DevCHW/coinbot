@@ -45,7 +45,7 @@ public class OrderService {
     }
 
     // 주문
-    public void orderTest(String market, BigDecimal price, BigDecimal volume, OrderType orderType) {
+    public void ordertmp(String market, BigDecimal price, BigDecimal volume, OrderType orderType) {
         // 매수
         if (orderType == OrderType.BUY) {
             OrderParam param = OrderParam.builder()

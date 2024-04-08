@@ -15,16 +15,12 @@ public class KaKaoClientImpl implements KakaoClient {
     private final KakaoAuthApi authApi;
     private final KakaoMessageApi messageApi;
     private final Environment env;
-    public static String accessToken;
-    public static String refreshToken;
 
     public KaKaoClientImpl(ObjectMapper objectMapper, KakaoAuthApi authApi, KakaoMessageApi messageApi, Environment env) {
         this.objectMapper = objectMapper;
         this.authApi = authApi;
         this.messageApi = messageApi;
         this.env = env;
-        accessToken = env.getProperty("kakao.access.token");
-        refreshToken = env.getProperty("kakao.refresh.token");
     }
 
     // 액세스 토큰 발급
@@ -40,8 +36,13 @@ public class KaKaoClientImpl implements KakaoClient {
                 .code(code)
                 .build();
         Token token = authApi.createAccessToken(param.toString());
-        refreshToken = token.getRefreshToken();
-        accessToken = token.getAccessToken();
+        KakaoClientConfig.refreshToken = token.getRefreshToken();
+        KakaoClientConfig.accessToken = token.getAccessToken();
+        KakaoClientConfig.accessTokenExpiredAt = token.accessTokenExpiredAt();
+        KakaoClientConfig.refreshTokenExpiredAt = token.refreshTokenExpiredAt();
+        System.out.println("token = " + token);
+        System.out.println("token.accessTokenExpiredAt() = " + token.accessTokenExpiredAt());
+        System.out.println("token.refreshTokenExpiredAt() = " + token.refreshTokenExpiredAt());
     }
 
     // 엑세스 토큰 API로 발급
@@ -56,8 +57,13 @@ public class KaKaoClientImpl implements KakaoClient {
                 .code(code)
                 .build();
         Token token = authApi.createAccessToken(param.toString());
-        refreshToken = token.getRefreshToken();
-        accessToken = token.getAccessToken();
+        KakaoClientConfig.refreshToken = token.getRefreshToken();
+        KakaoClientConfig.accessToken = token.getAccessToken();
+        KakaoClientConfig.accessTokenExpiredAt = token.accessTokenExpiredAt();
+        KakaoClientConfig.refreshTokenExpiredAt = token.refreshTokenExpiredAt();
+        System.out.println("token = " + token);
+        System.out.println("token.accessTokenExpiredAt() = " + token.accessTokenExpiredAt());
+        System.out.println("token.refreshTokenExpiredAt() = " + token.refreshTokenExpiredAt());
     }
 
     // 카톡 메세지 전송

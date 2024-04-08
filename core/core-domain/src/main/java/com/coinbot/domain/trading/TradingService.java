@@ -21,14 +21,10 @@ public class TradingService {
 
     // 매도
     public void sell(String market, BigDecimal quantity) {
+        orderService.ordertmp(market, null, quantity, OrderType.SELL);
         orderService.order(market, null, quantity, OrderType.SELL);
     }
 
-    // 매도
-    public void sellTmp(String market, BigDecimal quantity) {
-        orderService.orderTest(market, null, quantity, OrderType.SELL);
-    }
-    
     // 트레이딩 정보 초기화
     public void init() {
         tradingInfoManager.init();

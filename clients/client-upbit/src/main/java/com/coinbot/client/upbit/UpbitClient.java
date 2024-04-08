@@ -1,8 +1,8 @@
 package com.coinbot.client.upbit;
 
 import com.coinbot.client.upbit.model.*;
-import com.coinbot.client.upbit.param.OrderParam;
 import com.coinbot.client.upbit.param.MinuteCandleParam;
+import com.coinbot.client.upbit.param.OrderParam;
 import com.coinbot.client.upbit.param.TickParam;
 
 import java.util.List;
@@ -28,6 +28,11 @@ public interface UpbitClient {
      * 분봉 캔들 조회
      */
     List<Candle> getCandles(MinuteCandleParam param);
+
+    /**
+     * 분봉 캔들 단건 조회
+     */
+    Candle getCandle(MinuteCandleParam param);
 
     /**
      * 현재가 정보 목록 조회

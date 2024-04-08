@@ -1,5 +1,6 @@
 package com.coinbot.client.upbit.model;
 
+import com.coinbot.client.upbit.model.enums.CandleDirection;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +29,15 @@ public class Candle {
     private BigDecimal changeRate;                 // 전일 종가 대비 변화량
     private BigDecimal convertedTradePrice;        // 종가 환산 화폐 단위로 환산된 가격(요청에 convertingPriceUnit 파라미터 없을 시 해당 필드 포함되지 않음.)
     private String firstDayOfPeriod;               // 캔들 기간의 가장 첫 날
+
+
+    // 캔들의 길이 (고가 - 저가)
+    public BigDecimal length() {
+        return highPrice.subtract(lowPrice);
+    }
+
+    // 방향
+    public CandleDirection direction(Candle before) {
+        return before.getTradePrice().compareTo(tradePrice) < 0 ? CandleDirection.UP : CandleDirection.DOWN;
+    }
 }
