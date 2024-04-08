@@ -29,7 +29,7 @@ public class Ticker {
     private BigDecimal lowPrice;              // 저가
     private BigDecimal tradePrice;            // 종가(현재가)
     private BigDecimal prevClosingPrice;      // 전일 종가(UTC 0시 기준)
-    private String change;                    // EVEN : 보합 / RISE : 상승 / FALL : 하락
+    private Change change;                    // 전일 종가 대비 EVEN : 보합 / RISE : 상승 / FALL : 하락
     private BigDecimal changePrice;           // 변화액의 절대값
     private BigDecimal changeRate;            // 변화율의 절대값
     private BigDecimal signedChangePrice;     // 부호가 있는 변화액

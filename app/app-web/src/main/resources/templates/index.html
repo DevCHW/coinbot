@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>코인 자동매매 로그인 페이지</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{lib/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+
+    <!-- Font Awesome 5 Icons -->
+    <link rel="stylesheet" type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css}">
+
+    <!-- title Icon -->
+<!--    <link href="images/titleicon.png" rel="shortcut icon" type="image/x-icon">-->
+
+    <!-- Optional JavaScript -->
+    <script type="text/javascript" th:href="@{/lib/jquery/jquery-3.6.0.min.js}"></script>
+    <script type="text/javascript" th:href="@{/lib/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- jquery-ui -->
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/jquery-ui-1.13.1.custom/jquery-ui.css}"/>
+    <script type="text/javascript" th:href="@{/lib/jquery-ui-1.13.1.custom/jquery-ui.js}"></script>
+
+    <!-- ajaxForm -->
+    <script type="text/javascript" th:href="@{/lib/jquery/jquery.form.min.js}"></script>
+
+    <!-- 직접 만든 CSS -->
+    <link rel="stylesheet" th:href="@{/css/page/login.css}"/>
+
+    <!-- 직접만든 javascript -->
+    <script type="text/javascript" th:href="@{/js/page/login.js}"></script>
+
+</head>
+<body>
+<form name="loginForm" id="loginForm">
+    <div id="login" class="d-flex flex-column mx-auto my-5">
+        <div id="logo_img_box" class="m-auto" style="cursor:pointer;">
+            <img id="logo" src="images/logo.png" class="rounded">
+        </div>
+
+        <div id="about_us" class="my-3">
+            <h2 class="text-center">Hello</h2>
+            <p id="about_content" class="text-center">투자 대원칙 1. 돈을 잃지 말자</p>
+        </div>
+
+        <!-- Email -->
+        <div id="input_id" class="d-flex flex-column">
+            <label for="userid">Email</label>
+            <input type="text" id="userId" name="userId" class="input_login rounded pl-2" placeholder="Enter your email"/>
+            <span id="userId_error" class="login_error pl-1 mt-2">Email is required.</span>
+        </div>
+
+        <!-- Password -->
+        <div id="input_password" class="d-flex flex-column mt-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="input_login rounded pl-2" placeholder="Enter your password"/>
+            <span id="passwd_error" class="login_error pl-1 mt-2">Password is required.</span>
+        </div>
+
+        <!-- btn_login -->
+        <button id="btn_login" type="button" class="btn rounded mt-4">Sign in</button>
+        <div class="mx-auto my-4">Not a member yet?&nbsp;<span id="btn_signup">Sign Up</span></div>
+    </div>
+
+    <!-- redirectURL -->
+    <input type="hidden" id="returnURL" name="redirectURL" value="${redirectURL}"/>
+</form>
+</body>
+</html>

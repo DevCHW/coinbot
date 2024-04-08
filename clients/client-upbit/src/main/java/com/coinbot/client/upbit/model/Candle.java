@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Candle {
+
     private String market;                         // 마켓명
     private LocalDateTime candleDateTimeUtc;       // 캔들 기준 시각(UTC 기준) 포맷: yyyy-MM-dd'T'HH:mm:ss
     private LocalDateTime candleDateTimeKst;       // 캔들 기준 시각(KST 기준) 포맷: yyyy-MM-dd'T'HH:mm:ss

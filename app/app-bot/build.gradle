@@ -2,12 +2,10 @@ bootJar.enabled = true
 jar.enabled = false
 
 dependencies {
-    implementation project(":app:app-web")
     implementation project(":core:core-enum")
     implementation project(":core:core-domain")
     implementation project(":support:monitoring")
     implementation project(":support:logging")
 
-    implementation 'org.springframework:spring-context'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter'
 }

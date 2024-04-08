@@ -1,7 +1,7 @@
 package com.coinbot.app.bot;
 
-import com.coinbot.domain.alram.AlarmService;
-import com.coinbot.domain.trading.TradingService;
+import com.coinbot.domain.upbit.alram.AlarmService;
+import com.coinbot.domain.upbit.trading.TradingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
