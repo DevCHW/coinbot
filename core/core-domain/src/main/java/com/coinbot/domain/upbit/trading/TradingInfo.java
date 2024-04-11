@@ -9,15 +9,21 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class TradingInfo {
 
-    private static Map<String, Asset> assets;       // 업비트 보유 자산 목록
-    private static List<String> marketList;         // 업비트 전체 마켓 이름 목록
-    private static boolean trading;                 // 현재 트레이딩 진행 여부
+    private static Map<String, Asset> assets;           // 업비트 보유 자산 목록
+    private static List<String> marketList;             // 업비트 전체 마켓 이름 목록
+    private static boolean trading;                     // 현재 트레이딩 진행 여부
 
     private TradingInfo() {
 
+    }
+
+    public static String getCoinName(String market) {
+        String prefix = "KRW-";
+        return market.substring(market.indexOf(prefix) + prefix.length());
     }
 
     public static BigDecimal seedMoney() {

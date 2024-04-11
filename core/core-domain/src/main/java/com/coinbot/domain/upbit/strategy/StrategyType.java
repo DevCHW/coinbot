@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum StrategyType {
-    FIVE_MINUTE_THREE_CANDLE_TRADING("fiveMinuteThreeCandleTradingStrategy"),
+    FIVE_MINUTE_THREE_CANDLE_TRADING("myStrategy"),
     CIRCULAR_TRADING("circularTradingStrategy"),
     TEST("testStrategy");
 

@@ -47,7 +47,7 @@ public class TradingInfoManager {
                 .map(Market::getMarket)
                 .filter(market -> market.startsWith("KRW")) // KRW 지원 마켓 필터링
                 .toList();
-
+        
         // 트레이딩 정보 세팅
         TradingInfo.InitializeParam param = TradingInfo.InitializeParam.builder()
                 .trading(false)

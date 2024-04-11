@@ -10,7 +10,7 @@ const today = new Date();
 
 const year = today.getFullYear(); // 년도
 let month = today.getMonth() + 1;  // 월
-let day = today.getDate();  // 날짜
+let day = today.getDate();  // 날짜memberList.jsmemberList.js
 
 if(month < 10) month = "0"+month;
 if(day < 10) day = "0"+day;

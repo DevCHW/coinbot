@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 테스트 클래스
+ * 테스트 전략
  */
 @Component
 @RequiredArgsConstructor

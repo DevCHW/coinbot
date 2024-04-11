@@ -19,7 +19,7 @@ public class ViewController {
      */
     @GetMapping("/report/trading")
     public String tradingReport() {
-        return null;
+        return "trading.html";
     }
     
 }
