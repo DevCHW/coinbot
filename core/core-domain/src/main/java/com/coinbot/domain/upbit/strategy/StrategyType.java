@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum StrategyType {
     FIVE_MINUTE_THREE_CANDLE_TRADING("myStrategy"),
     CIRCULAR_TRADING("circularTradingStrategy"),
+    VOLATILITY_BREAKOUT_STRATEGY("volatilityBreakoutStrategy"),
     TEST("testStrategy");
 
     private final String name;

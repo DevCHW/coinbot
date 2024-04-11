@@ -82,11 +82,10 @@ public class MyStrategy implements Strategy {
             int size = minuteCandles5.size();
             for (int idx = 0; idx < size-1; idx++) {    // idx가 앞일 수록 최신캔들
                 Candle candle = minuteCandles5.get(idx);
-
                 // 캔들 길이
                 BigDecimal length = candle.length();
-
                 CandleDirection direction = candle.direction(minuteCandles5.get(idx+1)); // 캔들 방향
+                System.out.println("direction = " + direction);
             }
 
             String coinName = TradingInfo.getCoinName(market);

@@ -16,7 +16,7 @@ public class BotExecutor {
 
     @Scheduled(fixedDelay = 30000, initialDelay = 5000)
     public void trade() {
-        strategyExecutor.execute(StrategyType.FIVE_MINUTE_THREE_CANDLE_TRADING);
+        strategyExecutor.execute(StrategyType.VOLATILITY_BREAKOUT_STRATEGY);
     }
 
 }
