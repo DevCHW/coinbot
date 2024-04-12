@@ -7,6 +7,7 @@ import com.coinbot.client.upbit.param.MinuteCandleParam;
 import com.coinbot.domain.upbit.strategy.Strategy;
 import com.coinbot.domain.upbit.trading.TradingInfo;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -37,13 +38,16 @@ public class VolatilityBreakoutStrategy implements Strategy {
                 .sorted(Comparator.comparing(Ticker::getAccTradePrice24h).reversed())
                 .limit(10)
                 .toList();
+
         for (Ticker ticker : top5Volume24h) {
             int k = 5;
             String market = ticker.getMarket();
-            MinuteCandleParam.builder()
+            MinuteCandleParam param = MinuteCandleParam.builder()
                     .market(market)
                     .count(1)
                     .build();
+            Candle candle = upbit.getCandle(param);
+            System.out.println("candle = " + candle);
         }
 //        BigDecimal newLength = upbit.getCandle();
         return null;
